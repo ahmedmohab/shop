@@ -6,7 +6,7 @@
 							<div class="product-image-wrapper">
 								<div class="single-products">
 										<div class="productinfo text-center">                            
-											<img src="images/home/product1.jpg" alt="" />
+											<img src="/images/home/product1.jpg" alt="" />
 											<h2>$<%= product.productprice %></h2>
 											<p><%= product.productname %></p>
 											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -15,7 +15,8 @@
 											<div class="overlay-content">
 												<h2><%= product.productprice %></h2>
 											    <p><%= product.productname %></p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+<!--												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>-->
+                                                <%= button_to "Add to Cart", add_to_cart_path(:product_id => product), :method => :post %>
 											</div>
 										</div>
 								</div>

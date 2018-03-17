@@ -17,7 +17,11 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
-    @product = Product.new
+      if current_user.try(:admin?)
+  # do something
+          @product = Product.new
+      end
+    
   end
 
   # GET /products/1/edit

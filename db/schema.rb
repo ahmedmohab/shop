@@ -10,10 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180314180924) do
+ActiveRecord::Schema.define(version: 20180317191750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "carts", id: :integer, default: -> { "nextval('\"Cart_id_seq\"'::regclass)" }, force: :cascade do |t|
+    t.integer "product_id"
+    t.integer "user_id"
+  end
 
   create_table "categories", id: :integer, default: -> { "nextval('productcategories_categoryid_seq'::regclass)" }, force: :cascade do |t|
     t.string "name", limit: 50, null: false
@@ -41,7 +46,7 @@ ActiveRecord::Schema.define(version: 20180314180924) do
     t.text "productdesc", null: false
     t.string "productthumb", limit: 100, null: false
     t.string "productimage", limit: 100, null: false
-    t.integer "productcategoryid"
+    t.integer "category_id"
     t.float "productstock"
     t.string "productlocation", limit: 250
   end
@@ -60,6 +65,7 @@ ActiveRecord::Schema.define(version: 20180314180924) do
     t.string "encrypted_password", limit: 128
     t.string "confirmation_token", limit: 128
     t.string "remember_token", limit: 128
+    t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email"
     t.index ["remember_token"], name: "index_users_on_remember_token"
   end
