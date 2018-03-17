@@ -1,0 +1,62 @@
+<%= form_with(model: product, local: true) do |form| %>
+  <% if product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+      <% product.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :productname %>
+    <%= form.text_field :productname, id: :product_productname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :productprice %>
+    <%= form.text_field :productprice, id: :product_productprice %>
+  </div>
+
+  <div class="field">
+    <%= form.label :productweight %>
+    <%= form.text_field :productweight, id: :product_productweight %>
+  </div>
+
+  <div class="field">
+    <%= form.label :productdesc %>
+    <%= form.text_area :productdesc, id: :product_productdesc %>
+  </div>
+
+  <div class="field">
+    <%= form.label :productthumb %>
+    <%= form.text_field :productthumb, id: :product_productthumb %>
+  </div>
+
+  <div class="field">
+    <%= form.label :productimage %>
+    <%= form.text_field :productimage, id: :product_productimage %>
+  </div>
+
+  <div class="field">
+    <%= form.label :productcategoryid %>
+    <%= form.number_field :productcategoryid, id: :product_productcategoryid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :productstock %>
+    <%= form.text_field :productstock, id: :product_productstock %>
+  </div>
+
+  <div class="field">
+    <%= form.label :productlocation %>
+    <%= form.text_field :productlocation, id: :product_productlocation %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

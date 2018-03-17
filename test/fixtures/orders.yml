@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  orderuserid: 1
+  orderproductid: 1
+  orderamount: 1.5
+  ordershipaddress: MyString
+  ordercity: MyString
+  orderphone: MyString
+  ordershipping: 1.5
+  ordertax: 1.5
+  orderemail: MyString
+  orderdate: 2018-03-14 19:50:54
+  ordershipped: 1
+  ordertrackingnumber: MyString
+
+two:
+  orderuserid: 1
+  orderproductid: 1
+  orderamount: 1.5
+  ordershipaddress: MyString
+  ordercity: MyString
+  orderphone: MyString
+  ordershipping: 1.5
+  ordertax: 1.5
+  orderemail: MyString
+  orderdate: 2018-03-14 19:50:54
+  ordershipped: 1
+  ordertrackingnumber: MyString

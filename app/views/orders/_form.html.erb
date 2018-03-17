@@ -1,0 +1,77 @@
+<%= form_with(model: order, local: true) do |form| %>
+  <% if order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+      <% order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :orderuserid %>
+    <%= form.number_field :orderuserid, id: :order_orderuserid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :orderproductid %>
+    <%= form.number_field :orderproductid, id: :order_orderproductid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :orderamount %>
+    <%= form.text_field :orderamount, id: :order_orderamount %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ordershipaddress %>
+    <%= form.text_field :ordershipaddress, id: :order_ordershipaddress %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ordercity %>
+    <%= form.text_field :ordercity, id: :order_ordercity %>
+  </div>
+
+  <div class="field">
+    <%= form.label :orderphone %>
+    <%= form.text_field :orderphone, id: :order_orderphone %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ordershipping %>
+    <%= form.text_field :ordershipping, id: :order_ordershipping %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ordertax %>
+    <%= form.text_field :ordertax, id: :order_ordertax %>
+  </div>
+
+  <div class="field">
+    <%= form.label :orderemail %>
+    <%= form.text_field :orderemail, id: :order_orderemail %>
+  </div>
+
+  <div class="field">
+    <%= form.label :orderdate %>
+    <%= form.datetime_select :orderdate, id: :order_orderdate %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ordershipped %>
+    <%= form.number_field :ordershipped, id: :order_ordershipped %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ordertrackingnumber %>
+    <%= form.text_field :ordertrackingnumber, id: :order_ordertrackingnumber %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,62 @@
+<%= form_with(model: user, local: true) do |form| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :useremail %>
+    <%= form.text_field :useremail, id: :user_useremail %>
+  </div>
+
+  <div class="field">
+    <%= form.label :userpassword %>
+    <%= form.text_field :userpassword, id: :user_userpassword %>
+  </div>
+
+  <div class="field">
+    <%= form.label :userfirstname %>
+    <%= form.text_field :userfirstname, id: :user_userfirstname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :userlastname %>
+    <%= form.text_field :userlastname, id: :user_userlastname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :usercity %>
+    <%= form.text_field :usercity, id: :user_usercity %>
+  </div>
+
+  <div class="field">
+    <%= form.label :useremailverified %>
+    <%= form.number_field :useremailverified, id: :user_useremailverified %>
+  </div>
+
+  <div class="field">
+    <%= form.label :userverificationcode %>
+    <%= form.text_field :userverificationcode, id: :user_userverificationcode %>
+  </div>
+
+  <div class="field">
+    <%= form.label :userphone %>
+    <%= form.text_field :userphone, id: :user_userphone %>
+  </div>
+
+  <div class="field">
+    <%= form.label :useraddress %>
+    <%= form.text_field :useraddress, id: :user_useraddress %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
