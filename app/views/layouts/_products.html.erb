@@ -1,6 +1,11 @@
 <div class="col-sm-9 padding-right">
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">Features Items</h2>
+                        <% if current_user %>
+                        <% @user_id = current_user.id %>
+                        <% else %>
+                        <% @user_id = cookies[:user_id] %>
+                        <% end %>
                         <% @products.each do |product| %>
 						<div class="col-sm-4">
 							<div class="product-image-wrapper">
@@ -9,7 +14,7 @@
 											<img src="/images/home/product1.jpg" alt="" />
 											<h2>$<%= product.productprice %></h2>
 											<p><%= link_to product.productname, product %></p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+											<p><%= link_to "add to cart", add_to_cart_url(product.id, @user_id)%></p>
 										</div>
 								</div>
 							</div>

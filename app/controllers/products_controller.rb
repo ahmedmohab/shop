@@ -4,6 +4,9 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
+      if cookies.signed[:user_id] == nil && !current_user
+            cookies.permanent.signed[:user_id] = rand(10 ** 10)
+        end
     @products = Product.all
     @categories = Category.all
   end

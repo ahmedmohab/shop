@@ -13,7 +13,6 @@ gem 'rails', '~> 5.1.5'
 gem 'pg'
 gem 'devise'
 gem 'pundit'
-gem 'clearance'
 gem 'bootstrap-sass'
 
 # Use Puma as the app server
