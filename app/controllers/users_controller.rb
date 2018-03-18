@@ -1,15 +1,19 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update, :destroy]
+#  before_action :set_user, only: [:edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
   def index
     @users = User.all
   end
-
+    def login
+        sign_in(User.find(params[:id]),scope: :user)
+    end
+    
   # GET /users/1
   # GET /users/1.json
   def show
+      @user = User.find(params[:id])
   end
 
   # GET /users/new
@@ -19,6 +23,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+      @user = User.find(params[:id])
   end
 
   # POST /users
@@ -69,6 +74,9 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:useremail, :userpassword, :userfirstname, :userlastname, :usercity, :userphone, :useraddress)
+        list_params_allowed = [:email, :password, :userfirstname, :userlastname, :usercity, :userphone, :useraddress]
+  # Add the params only for admin
+  list_params_allowed << :admin if current_user.try(:admin?)
+  params.require(:user).permit(list_params_allowed)
     end
-end
+    end

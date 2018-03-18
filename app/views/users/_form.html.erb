@@ -1,62 +1,56 @@
+<!--
 <%= form_with(model: user, local: true) do |form| %>
-  <% if user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-      <% user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+  
       </ul>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :useremail %>
-    <%= form.text_field :useremail, id: :user_useremail %>
+-->
+    		<div class="row">  	
+	    		<div class="col-sm-8">
+	    			<div class="contact-form">
+                        
+                        <form id="main-contact-form" class="contact-form row" name="contact-form" method="post">
+                        
+                        
+  <div class="form-group col-md-6">
+    <%= form.label 'E-mail' %>
+    <%= form.text_field :email, id: :user_useremail, class: 'form-control'%>
   </div>
 
-  <div class="field">
-    <%= form.label :userpassword %>
-    <%= form.text_field :userpassword, id: :user_userpassword %>
+  <div class="form-group col-md-6">
+    <%= form.label 'Password' %>
+    <%= form.text_field :password, id: :user_userpassword, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :userfirstname %>
-    <%= form.text_field :userfirstname, id: :user_userfirstname %>
+  <div class="form-group col-md-6">
+    <%= form.label 'First Name' %>
+    <%= form.text_field :userfirstname, id: :user_userfirstname, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :userlastname %>
-    <%= form.text_field :userlastname, id: :user_userlastname %>
+  <div class="form-group col-md-6">
+    <%= form.label 'Last Name' %>
+    <%= form.text_field :userlastname, id: :user_userlastname, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :usercity %>
-    <%= form.text_field :usercity, id: :user_usercity %>
+  <div class="form-group col-md-6">
+    <%= form.label 'City' %>
+    <%= form.text_field :usercity, id: :user_usercity, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :useremailverified %>
-    <%= form.number_field :useremailverified, id: :user_useremailverified %>
+  <div class="form-group col-md-6">
+    <%= form.label 'Phone Number' %>
+    <%= form.text_field :userphone, id: :user_userphone, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :userverificationcode %>
-    <%= form.text_field :userverificationcode, id: :user_userverificationcode %>
+  <div class="form-group col-md-12">
+    <%= form.label :Address %>
+    <%= form.text_field :useraddress, id: :user_useraddress, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :userphone %>
-    <%= form.text_field :userphone, id: :user_userphone %>
-  </div>
-
-  <div class="field">
-    <%= form.label :useraddress %>
-    <%= form.text_field :useraddress, id: :user_useraddress %>
-  </div>
-
-  <div class="actions">
+  <div class="form-group col-md-12">
     <%= form.submit %>
   </div>
+                            </form>
+                    </div>
+                </div>
+</div>
 <% end %>

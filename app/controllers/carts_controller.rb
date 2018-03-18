@@ -1,5 +1,5 @@
 class CartsController < ApplicationController
-  before_action :set_cart, only: [:show, :edit, :update, :destroy]
+  before_action :set_cart, only: [:show, :edit, :update]
 
   # GET /carts
   # GET /carts.json
@@ -13,9 +13,8 @@ class CartsController < ApplicationController
   end
     
     def add_to_cart
-  current_cart.add_item(params[:product_id])
-  # redirect to shopping cart or whereever
-end
+        current_cart.add_item(params[:product_id, :user_id])
+    end
     
   # GET /carts/new
   def new
