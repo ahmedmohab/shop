@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cart: one
+  product: one
+  count: 1
+  order: one
+
+two:
+  cart: two
+  product: two
+  count: 1
+  order: two

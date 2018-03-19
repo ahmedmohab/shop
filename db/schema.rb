@@ -16,7 +16,6 @@ ActiveRecord::Schema.define(version: 20180318091142) do
   enable_extension "plpgsql"
 
   create_table "carts", id: :integer, default: -> { "nextval('\"Cart_id_seq\"'::regclass)" }, force: :cascade do |t|
-    t.integer "product_id"
     t.integer "user_id"
   end
 
@@ -24,19 +23,21 @@ ActiveRecord::Schema.define(version: 20180318091142) do
     t.string "name", limit: 50, null: false
   end
 
+  create_table "items", id: :serial, force: :cascade do |t|
+    t.integer "cart_id"
+    t.integer "product_id", default: 0, null: false
+    t.integer "count", default: 1, null: false
+    t.integer "order_id"
+  end
+
   create_table "orders", id: :integer, default: -> { "nextval('orders_orderid_seq'::regclass)" }, force: :cascade do |t|
-    t.integer "orderuserid", null: false
-    t.integer "orderproductid", null: false
+    t.integer "user_id", null: false
     t.float "orderamount", null: false
     t.string "ordershipaddress", limit: 100, null: false
     t.string "ordercity", limit: 50, null: false
-    t.string "orderphone", limit: 20, null: false
-    t.float "ordershipping", null: false
-    t.float "ordertax", null: false
-    t.string "orderemail", limit: 100, null: false
-    t.datetime "orderdate", default: -> { "CURRENT_TIMESTAMP" }, null: false
-    t.integer "ordershipped", limit: 2, default: 0, null: false
-    t.string "ordertrackingnumber", limit: 80
+    t.datetime "order_date", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.integer "shipped", limit: 2, default: 0, null: false
+    t.string "tracking_number", limit: 80
   end
 
   create_table "products", id: :integer, default: -> { "nextval('products_productid_seq'::regclass)" }, force: :cascade do |t|

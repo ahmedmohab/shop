@@ -4,9 +4,19 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-      if cookies.signed[:user_id] == nil && !current_user
-            cookies.permanent.signed[:user_id] = rand(10 ** 10)
+      if !current_user
+          if cookies.signed[:user_id] == nil
+              cookies.permanent.signed[:user_id] = rand(10 ** 10)
+          end
+              @user_id = cookies.signed[:user_id]
+      else
+          @user_id = current_user.id
         end
+      @cart = Cart.where('user_id = ?', @user_id).first
+      if !@cart
+          @cart = Cart.new(user_id: @user_id)
+          @cart.save
+      end
     @products = Product.all
     @categories = Category.all
   end
@@ -89,6 +99,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:productname, :productprice, :productweight, :productdesc, :productthumb, :productimage, :category_id, :productstock, :productlocation)
+      params.require(:product).permit(:name, :price, :weight, :desc, :thumb, :image, :category_id, :stock)
     end
   end

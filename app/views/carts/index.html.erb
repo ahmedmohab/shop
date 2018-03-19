@@ -1,29 +1,24 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Carts</h1>
+<h1>Cart</h1>
 
 <table>
   <thead>
     <tr>
       <th>Product</th>
-      <th>User</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @carts.each do |cart| %>
+    <% @cart.items.each do |item| %>
       <tr>
-        <td><%= cart.product %></td>
-        <td><%= cart.user %></td>
-        <td><%= link_to 'Show', cart %></td>
-        <td><%= link_to 'Edit', edit_cart_path(cart) %></td>
-        <td><%= link_to 'Destroy', cart, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= item.product.productname %></td>
+        <td><%= link_to 'Show', item.product %></td>
+        <td><%= link_to 'delete', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Cart', new_cart_path %>
