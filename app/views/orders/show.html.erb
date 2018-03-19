@@ -1,64 +1,16 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Orderuserid:</strong>
-  <%= @order.orderuserid %>
-</p>
-
-<p>
-  <strong>Orderproductid:</strong>
-  <%= @order.orderproductid %>
-</p>
-
-<p>
   <strong>Orderamount:</strong>
   <%= @order.orderamount %>
 </p>
 
 <p>
-  <strong>Ordershipaddress:</strong>
-  <%= @order.ordershipaddress %>
-</p>
-
-<p>
-  <strong>Ordercity:</strong>
-  <%= @order.ordercity %>
-</p>
-
-<p>
-  <strong>Orderphone:</strong>
-  <%= @order.orderphone %>
-</p>
-
-<p>
-  <strong>Ordershipping:</strong>
-  <%= @order.ordershipping %>
-</p>
-
-<p>
-  <strong>Ordertax:</strong>
-  <%= @order.ordertax %>
-</p>
-
-<p>
-  <strong>Orderemail:</strong>
-  <%= @order.orderemail %>
-</p>
-
-<p>
   <strong>Orderdate:</strong>
-  <%= @order.orderdate %>
+  <%= @order.order_date %>
 </p>
 
 <p>
   <strong>Ordershipped:</strong>
-  <%= @order.ordershipped %>
+  <%= @order.shipped %>
 </p>
-
-<p>
-  <strong>Ordertrackingnumber:</strong>
-  <%= @order.ordertrackingnumber %>
-</p>
-
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>

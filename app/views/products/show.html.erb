@@ -2,32 +2,32 @@
 
 <p>
   <strong>Productname:</strong>
-  <%= @product.productname %>
+  <%= @product.name %>
 </p>
 
 <p>
   <strong>Productprice:</strong>
-  <%= @product.productprice %>
+  <%= @product.price %>
 </p>
 
 <p>
   <strong>Productweight:</strong>
-  <%= @product.productweight %>
+  <%= @product.weight %>
 </p>
 
 <p>
   <strong>Productdesc:</strong>
-  <%= @product.productdesc %>
+  <%= @product.desc %>
 </p>
 
 <p>
   <strong>Productthumb:</strong>
-  <%= @product.productthumb %>
+  <%= @product.thumb %>
 </p>
 
 <p>
   <strong>Productimage:</strong>
-  <%= @product.productimage %>
+  <%= @product.image %>
 </p>
 
 <p>
@@ -37,17 +37,12 @@
 
 <p>
   <strong>Productstock:</strong>
-    <% if @product.productstock %>
+    <% if @product.stock %>
         <p>In Stock</p>
     <% else %>
         <p>Out of stock</p>
     <% end %>
 </p>
 
-<p>
-  <strong>Productlocation:</strong>
-  <%= @product.productlocation %>
-</p>
-
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+<% if current_user.try('admin?') %> <%= link_to 'Edit', edit_product_path(@product) %> <% end %>|
+<%= link_to 'Back', request.referer.present? ? request.referer : default_path %>

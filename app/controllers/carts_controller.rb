@@ -1,14 +1,17 @@
 class CartsController < ApplicationController
-  before_action :set_cart, only: [:show, :update]
-
+before_action :set_cart, only: [:update]
+@user_id
+    @cart
+    @items
   # GET /carts
   # GET /carts.json
   def index
-       if current_user 
-            @cart = Cart.where('user_id = ?', current_user.id).first
+      if current_user 
+           @user_id =  current_user.id
         else
-            @cart = Cart.where('user_id = ?', cookies.signed[:user_id]).first
+            @user_id = cookies.signed[:user_id]
         end 
+    @cart = Cart.where('user_id = ?', @user_id).first
 #      @items = Item.where('cart_id = ?', @cart.id)
   end
     
@@ -18,8 +21,44 @@ class CartsController < ApplicationController
 #    end
     
   # GET /carts/new\
-    def add_item
-        
+def checkout
+    if current_user 
+           @user_id =  current_user.id
+        else
+            @user_id = cookies.signed[:user_id]
+        end 
+     @cart = Cart.where('user_id = ?', @user_id).first
+    @items = Item.where('cart_id = ?', @cart.id)
+end
+    
+    
+    def confirm
+        if current_user 
+           @user_id =  current_user.id
+        else
+            @user_id = cookies.signed[:user_id]
+        end 
+     @cart = Cart.where('user_id = ?', @user_id).first
+    @items = Item.where('cart_id = ?', @cart.id)
+        @subtotal = 0
+        @items.each do |item|
+            @product = Product.find_by(id: item.product_id)
+            @subtotal += @product.price * item.icount
+        end
+        @order = Order.new
+        @order.orderamount = @subtotal
+        @order.save
+        if current_user
+            @order.user_id = @user_id
+            @items = Item.where('user_id = ?', @user_id)
+            @items.each do |item|
+                item.order_id = @order.id
+                item.cart_id = nil
+            end
+        else
+            
+            redirect_to '/order/'+@order.id.to_s + '/edit/'
+        end
     end
     
     
@@ -79,6 +118,10 @@ class CartsController < ApplicationController
       @cart = Cart.find(params[:id])
     end
 
+        
+       
+        
+        
     # Never trust parameters from the scary internet, only allow the white list through.
     def cart_params
       params.require(:user_id)

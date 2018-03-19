@@ -12,15 +12,20 @@
   </thead>
 
   <tbody>
+      <% subtotal = 0 %>
     <% @cart.items.each do |item| %>
       <tr>
         <td><% product = Product.find_by(id: item.product_id) %> <%= product.name %></td>
         <td><%= item.icount %></td>
-        <td><%= link_to 'Show', product %></td>
+          <td><%= product.price %> <% subtotal += product.price * item.icount %></td>
+          
         <td><%= link_to 'delete', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          
       </tr>
     <% end %>
+      <tr><td></td><td>Subtotal:</td><td><%= subtotal %></td></tr>
   </tbody>
 </table>
+<%= link_to 'confirm', controller: "carts", action: "confirm", :val => cookies.signed[:subtotal] = subtotal if subtotal > 0 %>
 
 <br>

@@ -7,11 +7,6 @@ class ItemsController < ApplicationController
     @items = Item.all
   end
 
-  # GET /items/1
-  # GET /items/1.json
-  def show
-  end
-
   # GET /items/new
   def new
     @item = Item.new
@@ -30,12 +25,15 @@ class ItemsController < ApplicationController
             @cart = Cart.new(params[:user_id])
             @cart.save
         end
-        if @item = Item.where('product_id = ? AND cart_id = ?', params[:product_id], @cart.id).first != nil
-            @item.count += 1
+        @item = Item.where('product_id = ? AND cart_id = ?', params[:product_id], @cart.id).first
+        if  @item != nil
+            @item.update(icount: @item.icount + 1)
         else
             @item = Item.create(product_id: params[:product_id], cart_id: @cart.id)
         end
-#        @item.save
+        @item.save
+        Rails.logger.info(@item.errors.inspect) 
+
 #        format.html { redirect_to @cart, notice: @item.errors.full_messages }
         
 #        product.errors.full_messages
@@ -44,14 +42,14 @@ class ItemsController < ApplicationController
   # GET /items/1/edit
   def edit
   end
-
+    
   # POST /items
   # POST /items.json
   def create
     @item = Item.new(item_params)
 
     respond_to do |format|
-      if @item.save
+      if @item.save!
         format.html { redirect_to @item, notice: 'Item was successfully created.' }
         format.json { render :show, status: :created, location: @item }
       else
@@ -80,7 +78,7 @@ class ItemsController < ApplicationController
   def destroy
     @item.destroy
     respond_to do |format|
-      format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
+      format.html { redirect_to carts_url, notice: 'Item was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -93,6 +91,6 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.permit(:cart_id, :product_id, :count, :order_id)
+      params.permit(:cart_id, :product_id, :icount, :order_id)
     end
 end
