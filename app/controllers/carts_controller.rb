@@ -11,7 +11,11 @@ before_action :set_cart, only: [:update]
         else
             @user_id = cookies.signed[:user_id]
         end 
-    @cart = Cart.where('user_id = ?', @user_id).first
+     @cart = Cart.find_by(user_id: @user_id)
+      if @cart == nil
+          @cart = Cart.new(user_id: @user_id)
+          @cart.save
+      end
 #      @items = Item.where('cart_id = ?', @cart.id)
   end
     
@@ -27,7 +31,7 @@ def checkout
         else
             @user_id = cookies.signed[:user_id]
         end 
-     @cart = Cart.where('user_id = ?', @user_id).first
+     @cart = Cart.find_by(user_id: @user_id)
     @items = Item.where('cart_id = ?', @cart.id)
 end
     
@@ -38,7 +42,7 @@ end
         else
             @user_id = cookies.signed[:user_id]
         end 
-     @cart = Cart.where('user_id = ?', @user_id).first
+     @cart = Cart.find_by(user_id: @user_id)
     @items = Item.where('cart_id = ?', @cart.id)
         @subtotal = 0
         @items.each do |item|
@@ -50,10 +54,11 @@ end
         @order.save
         if current_user
             @order.user_id = @user_id
-            @items = Item.where('user_id = ?', @user_id)
+            @items = Item.where('cart_id = ?', @cart.id)
             @items.each do |item|
                 item.order_id = @order.id
                 item.cart_id = nil
+                item.save
             end
         else
             

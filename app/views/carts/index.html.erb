@@ -12,14 +12,13 @@
   </thead>
 
   <tbody>
-    <% @cart.items.each do |item| if @cart.items%>
+    <% @cart.items.each do |item| %>
       <tr>
         <td><% product = Product.find_by(id: item.product_id) %> <%= product.name %></td>
         <td><%= item.icount %></td>
         <td><%= link_to 'Show', product %></td>
         <td><%= link_to 'delete', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
-    <% end %>
       <% end %>
   </tbody>
 </table>

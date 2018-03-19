@@ -40,8 +40,20 @@ class OrdersController < ApplicationController
   # PATCH/PUT /orders/1
   # PATCH/PUT /orders/1.json
   def update
+      if current_user 
+           @user_id =  current_user.id
+        else
+            @user_id = cookies.signed[:user_id]
+        end 
     respond_to do |format|
       if @order.update(order_params)
+          @cart = Cart.find_by(user_id: @user_id)
+            @items = Item.where('cart_id = ?', @cart.id)
+            @items.each do |item|
+                item.order_id = @order.id
+                item.cart_id = nil
+                item.save
+            end
         format.html { redirect_to @order, notice: 'Order was successfully updated.' }
         format.json { render :show, status: :ok, location: @order }
       else

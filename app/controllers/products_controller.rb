@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
       else
           @user_id = current_user.id
         end
-      @cart = Cart.where('user_id = ?', @user_id).first
+      @cart = Cart.find_by(user_id: @user_id)
       if !@cart
           @cart = Cart.new(user_id: @user_id)
           @cart.save
