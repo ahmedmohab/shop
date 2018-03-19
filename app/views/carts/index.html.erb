@@ -12,6 +12,9 @@
   </thead>
 
   <tbody>
+      <% if @cart.items = nil %>
+      <p>No items in cart</p>
+      <% else %>
     <% @cart.items.each do |item| %>
       <tr>
         <td><% product = Product.find_by(id: item.product_id) %> <%= product.name %></td>
@@ -20,6 +23,7 @@
         <td><%= link_to 'delete', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
+      <% end %>
   </tbody>
 </table>
 
