@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_admin, except: [:index, :show]
+  before_action :authorize_admin, only: [:index, :edit, :update, :destroy]
   # GET /productcategories
   # GET /productcategories.json
   def index

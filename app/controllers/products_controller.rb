@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   #before_action :set_product, only: [:show, :edit, :update, :destroy]
     #before_action :require_login, only: [:new, :edit, :update, :destroy]
+    before_action :authorize_admin, only: [:new, :edit, :update, :destroy]
   # GET /products
   # GET /products.json
   def index

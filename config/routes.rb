@@ -15,6 +15,6 @@ Rails.application.routes.draw do
     root :to => 'products#index'
     get '/add_item/:product_id' => 'items#add_item', :as => 'add_item'
     
-    get 'index' => "products#index", :as => 'go_products'
+    get 'index' => "products#index", :as => 'default_path'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
