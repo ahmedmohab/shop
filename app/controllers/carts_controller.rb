@@ -50,6 +50,7 @@ end
             @subtotal += @product.price * item.icount
         end
         @order = Order.new
+        @order.user_id = @user_id
         @order.orderamount = @subtotal
         @order.save
         if current_user

@@ -1,5 +1,14 @@
 <p id="notice"><%= notice %></p>
+<% @items = Item.where('order_id = ?', @order.id) %>
+<% @items.each do |item| %>
+<% @product = Product.find(item.product_id) %>
 
+<p>
+    <strong><%= @product.name %></strong>
+    <%= item.icount %>
+</p> <br />
+
+<% end %>
 <p>
   <strong>Orderamount:</strong>
   <%= @order.orderamount %>

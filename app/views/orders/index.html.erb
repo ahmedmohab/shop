@@ -5,45 +5,27 @@
 <table>
   <thead>
     <tr>
-      <th>Orderuserid</th>
-      <th>Orderproductid</th>
       <th>Orderamount</th>
       <th>Ordershipaddress</th>
       <th>Ordercity</th>
-      <th>Orderphone</th>
-      <th>Ordershipping</th>
-      <th>Ordertax</th>
-      <th>Orderemail</th>
       <th>Orderdate</th>
       <th>Ordershipped</th>
-      <th>Ordertrackingnumber</th>
-      <th colspan="3"></th>
+      <th colspan="1"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @orders.each do |order| %>
       <tr>
-        <td><%= order.orderuserid %></td>
-        <td><%= order.orderproductid %></td>
         <td><%= order.orderamount %></td>
         <td><%= order.ordershipaddress %></td>
         <td><%= order.ordercity %></td>
-        <td><%= order.orderphone %></td>
-        <td><%= order.ordershipping %></td>
-        <td><%= order.ordertax %></td>
-        <td><%= order.orderemail %></td>
-        <td><%= order.orderdate %></td>
-        <td><%= order.ordershipped %></td>
-        <td><%= order.ordertrackingnumber %></td>
+        <td><%= order.order_date %></td>
+        <td><%= order.shipped %></td>
         <td><%= link_to 'Show', order %></td>
-        <td><%= link_to 'Edit', edit_order_path(order) %></td>
-        <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Order', new_order_path %>
