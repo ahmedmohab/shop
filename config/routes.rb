@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   
   resources :items
     devise_for :users
-    get 'carts/checkout' => "carts#checkout"
+    get '/carts/checkout' => "carts#checkout", :as => 'check_me_out'
     get 'carts/confirm' => "carts#confirm"
     resources :carts
   resources :users
