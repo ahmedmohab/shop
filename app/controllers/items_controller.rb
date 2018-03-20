@@ -25,14 +25,16 @@ class ItemsController < ApplicationController
             @cart = Cart.new(params[:user_id])
             @cart.save
         end
-        @item = Item.where('product_id = ? AND cart_id = ?', params[:product_id], @cart.id).first
-        if  @item != nil
-            @item.update(icount: @item.icount + 1)
-        else
-            @item = Item.create(product_id: params[:product_id], cart_id: @cart.id)
-        end
+       if @product = Product.find(params[:product_id])
+            @item = Item.where('product_id = ? AND cart_id = ?', params[:product_id], @cart.id).first
+            if  @item != nil
+                @item.update(icount: @item.icount + 1)
+            else
+                @item = Item.create(product_id: params[:product_id], cart_id: @cart.id)
+            end
         @item.save
-        Rails.logger.info(@item.errors.inspect) 
+        end
+        #Rails.logger.info(@item.errors.inspect) 
 
 #        format.html { redirect_to @cart, notice: @item.errors.full_messages }
         

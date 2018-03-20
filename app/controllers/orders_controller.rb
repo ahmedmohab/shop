@@ -24,6 +24,7 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/edit
   def edit
+      @order = Order.find params[:id]
   end
 
   # POST /orders
@@ -48,6 +49,7 @@ class OrdersController < ApplicationController
         else
             @user_id = cookies.signed[:user_id]
         end 
+       @order = Order.find params[:id]
     respond_to do |format|
       if @order.update(order_params)
           @order.user_id = @user_id

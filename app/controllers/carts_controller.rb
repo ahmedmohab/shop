@@ -62,9 +62,10 @@ end
                 item.save
             end
         else
-            
+            flash[:notice] = "jopio"
             redirect_to '/order/'+@order.id.to_s + '/edit/'
         end
+#        redirect_to '/orders/'
     end
     
     
