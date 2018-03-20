@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
   def index
       if !current_user
           if cookies.signed[:user_id] == nil
-              cookies.permanent.signed[:user_id] = rand(10 ** 10)
+              cookies.permanent.signed[:user_id] = rand(10 ** 8)
           end
               @user_id = cookies.signed[:user_id]
       else
