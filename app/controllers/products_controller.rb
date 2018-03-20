@@ -42,6 +42,7 @@ end
 
   # GET /products/1/edit
   def edit
+      @product = Product.find(params[:id])
   end
 
   # POST /products
@@ -84,9 +85,10 @@ end
   # DELETE /products/1.json
   def destroy
     #  if current_user.try(:admin?)
+      @product = Product.find(params[:id])
           @product.destroy
           respond_to do |format|
-              format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
+              format.html { redirect_to all_products_path, notice: 'Product was successfully destroyed.' }
               format.json { head :no_content }
           end
      # else

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 #  before_action :set_user, only: [:edit, :update, :destroy]
- before_action :authorize_admin, only: [:index, :makeadmin]
+ before_action :authorize_admin, only: [:index, :makeadmin, :admin]
   # GET /users
   # GET /users.json
   def index
@@ -17,6 +17,10 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
   end
 
+    
+    def admin
+    end
+    
   # GET /users/new
   def new
     @user = User.new

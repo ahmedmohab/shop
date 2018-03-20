@@ -1,2 +1,7 @@
-<% link_to '/categories/' %>
-<% link_to '/products/all' %>
+<div>
+    <p id="notice"><%= notice %></p>
+    <h1>Admin Page</h1>
+    <%= link_to '/categories/', categories_path %>
+<%= link_to '/products/all', all_products_path %>
+    <%= link_to '/users/', users_path%>
+</div>

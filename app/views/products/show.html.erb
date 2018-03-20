@@ -35,7 +35,7 @@
   <%= @category.name %>
 </p>
 
-<p>
+<p> 
   <strong>Productstock:</strong>
     <% if @product.stock %>
         <p>In Stock</p>
@@ -43,6 +43,5 @@
         <p>Out of stock</p>
     <% end %>
 </p>
-
 <% if current_user.try('admin?') %> <%= link_to 'Edit', edit_product_path(@product) %> <% end %>|
 <%= link_to 'Back', request.referer.present? ? request.referer : default_path_url %>

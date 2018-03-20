@@ -5,8 +5,8 @@ Rails.application.routes.draw do
     get '/carts/checkout' => "carts#checkout", :as => 'check_me_out'
     get 'carts/confirm' => "carts#confirm"
     get 'products/all' => "products#all", :as => 'all_products'
-    get 'users/admin' => 'users#admin'
-    post 'users/new' => 'users#new'
+    get '/users/admin' => "users#admin", :as => 'users_admin'
+    post 'users/new' => 'users#new'   
     resources :carts
   resources :users
   resources :products
