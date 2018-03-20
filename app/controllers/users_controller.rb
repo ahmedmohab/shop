@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
 #  before_action :set_user, only: [:edit, :update, :destroy]
-
+# before_filter :authorize_admin, except [:new]
   # GET /users
   # GET /users.json
-  def index
-    @users = User.all
-  end
+#  def index
+#    @users = User.all
+#  end
     def login
         sign_in(User.find(params[:id]),scope: :user)
     end
