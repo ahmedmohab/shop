@@ -1,11 +1,12 @@
 class UsersController < ApplicationController
 #  before_action :set_user, only: [:edit, :update, :destroy]
-# before_filter :authorize_admin, except [:new]
+ before_action :authorize_admin, only: [:index, :makeadmin]
   # GET /users
   # GET /users.json
-#  def index
-#    @users = User.all
-#  end
+  def index
+    @users = User.all
+  end
+    
     def login
         sign_in(User.find(params[:id]),scope: :user)
     end
@@ -19,7 +20,7 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
-      @cart = Cart.new(@user.id)
+     # @cart = Cart.new(@user.id)
   end
 
   # GET /users/1/edit
@@ -31,7 +32,6 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
@@ -47,7 +47,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
+      if @user.update(account_update)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -59,6 +59,12 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   # DELETE /users/1.json
+    
+    def makeadmin
+        @user = User.find(params[:id])
+        @user.update_attribute :admin, true
+        redirect_to '/users/'
+    end
   def destroy
     @user.destroy
     respond_to do |format|

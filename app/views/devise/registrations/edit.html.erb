@@ -30,7 +30,12 @@
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
-
+<% if current_user.try(:admin?) %>
+<div class="form-group col-md-6">
+    <%= f.label :admin %>
+ <%= f.check_box :admin, id: :user_admin, class: 'form-control' %>
+    </div>
+<% end %>
   <div class="actions">
     <%= f.submit "Update" %>
   </div>
