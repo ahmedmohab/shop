@@ -31,13 +31,13 @@
   </div>
 
   <div class="field">
-    <%= form.label :productcategoryid %>
-    <%= form.number_field :category_id, id: :product_category_id %>
+    <%= form.label :Category %>
+      <%= form.collection_select(:category_id, Category.all, :id, :name, {:include_blank => 'Select Category'} ) %>
   </div>
 
   <div class="field">
-    <%= form.label :productstock %>
-    <%= form.text_field :stock, id: :product_stock %>
+    <%= form.label :Quantity %>
+    <%= form.number_field :quantity, id: :product_quantity %>
   </div>
 
   <div class="actions">

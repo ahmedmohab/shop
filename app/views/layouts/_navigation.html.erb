@@ -37,6 +37,10 @@
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
+                                <li><a href="/index/"><i class="fa fa-crosshairs"></i>Index</a></li>
+                                <% if current_user.try(:admin?) %>
+                                <li><a href="/users/admin"><i class="fa fa-crosshairs"></i>Admin</a></li>
+                                <% end %>
                                 <li><a href="/orders/"><i class="fa fa-crosshairs"></i>Orders</a></li>
 								<li><a href="/carts/checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
 								<li><a href="/carts/"><i class="fa fa-shopping-cart"></i> Cart</a></li>

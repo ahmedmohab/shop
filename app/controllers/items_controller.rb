@@ -1,6 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
-
+    before_action :set_item, only: [:show, :edit, :update, :destroy]
   # GET /items
   # GET /items.json
 #  def index
@@ -26,19 +25,18 @@ class ItemsController < ApplicationController
             @cart.save
         end
        if @product = Product.find(params[:product_id])
-            @item = Item.where('product_id = ? AND cart_id = ?', params[:product_id], @cart.id).first
-            if  @item != nil
-                @item.update(icount: @item.icount + 1)
-            else
-                @item = Item.create(product_id: params[:product_id], cart_id: @cart.id)
-            end
-        @item.save
+           if @product.stock > 0
+               @item = Item.where('product_id = ? AND cart_id = ?', params[:product_id], @cart.id).first
+               if  @item != nil
+                   @item.update(icount: @item.icount + 1)
+               else
+                   @item = Item.create(product_id: params[:product_id], cart_id: @cart.id)
+               end
+               @product.stock -= 1
+               @product.save
+               @item.save
+           end
         end
-        #Rails.logger.info(@item.errors.inspect) 
-
-#        format.html { redirect_to @cart, notice: @item.errors.full_messages }
-        
-#        product.errors.full_messages
         redirect_to products_url
     end
   # GET /items/1/edit
@@ -65,6 +63,15 @@ class ItemsController < ApplicationController
   # PATCH/PUT /items/1.json
   def update
     respond_to do |format|
+        @product = Product.find(@item.product_id)
+        if item_params[:icount] > @item.icount
+            @product.stock -= item_params[:icount] - @item.icount
+            @product.save
+        elsif  item_params[:icount] < @item.icount
+            @product.stock += @item.icount - item_params[:icount]
+            @product.save
+        end
+        
       if @item.update(item_params)
         format.html { redirect_to @item, notice: 'Item was successfully updated.' }
         format.json { render :show, status: :ok, location: @item }
@@ -78,11 +85,14 @@ class ItemsController < ApplicationController
   # DELETE /items/1
   # DELETE /items/1.json
   def destroy
-    @item.destroy
-    respond_to do |format|
-      format.html { redirect_to carts_url, notice: 'Item was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+      @product = Product.find(@item.product_id)
+      @product.stock += @item.icount
+      @product.save
+      @item.destroy
+      respond_to do |format|
+          format.html { redirect_to carts_url, notice: 'Item was successfully destroyed.' }
+          format.json { head :no_content }
+      end
   end
 
   private
@@ -90,8 +100,8 @@ class ItemsController < ApplicationController
     def set_item
       @item = Item.find(params[:id])
     end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
+    
+    
     def item_params
       params.permit(:cart_id, :product_id, :icount, :order_id)
     end

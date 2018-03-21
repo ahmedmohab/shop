@@ -13,8 +13,12 @@
 										<div class="productinfo text-center">                            
 											<img src="/images/home/product1.jpg" alt="" />
 											<h2>$<%= product.price %></h2>
-											<p><%= link_to product.name, product %></p>
+                                               <p><%= link_to product.name, product %></p>
+                                            <% if product.stock > 0 %>
 											<p><%= link_to "add to cart", add_item_url(product.id)%></p>
+                                             <% else %>
+                                            <p>Out of stock</p>
+                                            <% end %>
 										</div>
 								</div>
 							</div>

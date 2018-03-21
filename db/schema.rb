@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180318091142) do
+ActiveRecord::Schema.define(version: 20180320225837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,30 +26,33 @@ ActiveRecord::Schema.define(version: 20180318091142) do
   create_table "items", id: :serial, force: :cascade do |t|
     t.integer "cart_id"
     t.integer "product_id", default: 0, null: false
-    t.integer "count", default: 1, null: false
+    t.integer "icount", default: 1, null: false
     t.integer "order_id"
   end
 
   create_table "orders", id: :integer, default: -> { "nextval('orders_orderid_seq'::regclass)" }, force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.integer "user_id"
     t.float "orderamount", null: false
-    t.string "ordershipaddress", limit: 100, null: false
-    t.string "ordercity", limit: 50, null: false
+    t.string "ordershipaddress", limit: 100
+    t.string "ordercity", limit: 50
     t.datetime "order_date", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.integer "shipped", limit: 2, default: 0, null: false
     t.string "tracking_number", limit: 80
+    t.string "guest_name", limit: 100
+    t.string "guest_email", limit: 100
+    t.integer "guest_phone"
   end
 
   create_table "products", id: :integer, default: -> { "nextval('products_productid_seq'::regclass)" }, force: :cascade do |t|
-    t.string "productname", limit: 100, null: false
-    t.float "productprice", null: false
-    t.float "productweight", null: false
-    t.text "productdesc", null: false
-    t.string "productthumb", limit: 100, null: false
-    t.string "productimage", limit: 100, null: false
-    t.integer "category_id"
-    t.float "productstock"
-    t.string "productlocation", limit: 250
+    t.string "name", limit: 100
+    t.float "price", default: 0.0, null: false
+    t.float "weight", default: 0.0, null: false
+    t.text "desc"
+    t.string "thumb", limit: 100
+    t.string "image", limit: 100
+    t.integer "category_id", default: 0, null: false
+    t.float "stock"
+    t.integer "quantity"
   end
 
   create_table "users", id: :integer, default: -> { "nextval('users_userid_seq'::regclass)" }, force: :cascade do |t|
