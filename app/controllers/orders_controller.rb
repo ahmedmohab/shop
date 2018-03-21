@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show]
-    befor_action :set_user, only: [:index, :update]
+    before_action :set_user, only: [:index, :update]
   # GET /orders
   # GET /orders.json
   def index
