@@ -88,6 +88,6 @@ class UsersController < ApplicationController
         list_params_allowed = [:email, :password, :userfirstname, :userlastname, :usercity, :userphone, :useraddress]
   # Add the params only for admin
   list_params_allowed << :admin if current_user.try(:admin?)
-  params.require(:user).permit(list_params_allowed)
+        arams.require(:user).permit(list_params_allowed)
     end
-    end
+end

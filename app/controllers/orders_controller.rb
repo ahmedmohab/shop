@@ -1,14 +1,9 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show]
-
+    befor_action :set_user, only: [:index, :update]
   # GET /orders
   # GET /orders.json
   def index
-      if current_user 
-           @user_id =  current_user.id
-        else
-            @user_id = cookies.signed[:user_id]
-        end 
     @orders = Order.where('user_id = ?', @user_id)
   end
 
@@ -44,13 +39,8 @@ class OrdersController < ApplicationController
   # PATCH/PUT /orders/1
   # PATCH/PUT /orders/1.json
   def update
-      if current_user 
-           @user_id =  current_user.id
-        else
-            @user_id = cookies.signed[:user_id]
-        end 
-       @order = Order.find params[:id]
-    respond_to do |format|
+      @order = Order.find params[:id]
+      respond_to do |format|
       if @order.update(order_params)
           @order.user_id = @user_id
           @cart = Cart.find_by(user_id: @user_id)
@@ -84,7 +74,13 @@ class OrdersController < ApplicationController
     def set_order
       @order = Order.find(params[:id])
     end
-
+    def set_user
+        if current_user 
+           @user_id =  current_user.id
+        else
+            @user_id = cookies.signed[:user_id]
+        end 
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
      def order_params
       params.require(:order).permit(:user_id, :orderamount, :ordershipaddress, :ordercity, :guest_phone, :guest_email, :guest_email, :order_date, :shipped, :tracking_number)
